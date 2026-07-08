@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hello-device-api · Hello Device as an HTTP proxy</title>
+<meta name="theme-color" content="#1a1a1e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231a1a1e'/%3E%3Ctext x='16' y='23' font-family='serif' font-size='22' fill='%237a9c7e' text-anchor='middle'%3E%E2%97%8B%3C/text%3E%3C/svg%3E">
+<style>
+:root{--void:#1a1a1e;--deep:#212127;--line:rgba(232,228,219,0.08);--line2:rgba(232,228,219,0.16);--text:#e8e4db;--muted:#928d80;--sage:#7a9c7e;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:var(--text);font-family:var(--sans);line-height:1.6;padding:40px 24px 80px;-webkit-font-smoothing:antialiased}
+main{max-width:820px;margin:0 auto}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.2}
+h1{font-size:44px;margin-bottom:6px}h1 em{color:var(--sage);font-style:italic}
+h2{font-size:26px;margin:36px 0 12px}
+h3{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.16em;font-family:var(--mono);margin:22px 0 8px}
+p{color:var(--muted);margin-bottom:12px}
+a{color:var(--sage);text-decoration:none;border-bottom:1px solid rgba(122,156,126,0.3)}
+a:hover{border-bottom-color:var(--sage)}
+pre{background:var(--deep);border:1px solid var(--line);border-radius:10px;padding:16px 20px;font-family:var(--mono);font-size:13px;color:var(--text);overflow-x:auto;margin:12px 0}
+code{font-family:var(--mono);font-size:13px;color:var(--sage)}
+.lede{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--text);line-height:1.5;margin-bottom:22px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em}
+td:first-child{font-family:var(--mono);color:var(--sage);white-space:nowrap}
+.footer{margin-top:56px;padding-top:28px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
+.footer .co{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6b6660}
+</style>
+</head>
+<body>
+<main>
+  <h1>hello-device-<em>api</em></h1>
+  <p class="lede">HTTP proxy for the Hello Device catalogue. Zero framework, Node built-ins only. One file, one process.</p>
+
+  <h3>Run local</h3>
+<pre>node src/server.js  # listens on :8787
+curl http://localhost:8787/capabilities</pre>
+
+  <h3>Docker</h3>
+<pre>docker compose up -d</pre>
+
+  <h2>Endpoints</h2>
+  <table>
+    <tr><th>Method + Path</th><th>Purpose</th></tr>
+    <tr><td>GET /health</td><td>Liveness check</td></tr>
+    <tr><td>GET /capabilities</td><td>Full catalogue (metadata)</td></tr>
+    <tr><td>GET /groups</td><td>The seven categories</td></tr>
+    <tr><td>GET /check/:name</td><td>Availability for one capability</td></tr>
+    <tr><td>GET /test/:name</td><td>Live server-side test (browser-only capabilities return a note)</td></tr>
+    <tr><td>GET /report</td><td>Grouped catalogue + summary</td></tr>
+  </table>
+
+  <h2>Browser-only vs server-testable</h2>
+  <p>Most of the ~45 Web APIs Hello Device tracks only exist in a real browser tab. For those, this API returns metadata + <code>available:null</code> with a note pointing to the SDK. For <code>wasm</code>, <code>crypto</code>, and <code>fetch</code> we actually run the test server-side.</p>
+
+  <h2>Companions</h2>
+  <p><a href="https://github.com/sjgant80-hub/hello-device-sdk">hello-device-sdk</a> · client-side detection<br>
+     <a href="https://github.com/sjgant80-hub/hello-device-mcp">hello-device-mcp</a> · MCP server for Claude<br>
+     <a href="https://github.com/sjgant80-hub/hello-device">hello-device</a> · flagship browser app</p>
+
+  <div class="footer">
+    <p>MIT · <a href="https://github.com/sjgant80-hub/hello-device-api">source</a></p>
+    <p class="co">AI-Native Solutions · ai-nativesolutions.com</p>
+  </div>
+</main>
+</body>
+</html>

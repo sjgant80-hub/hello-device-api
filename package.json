@@ -1,0 +1,38 @@
+{
+  "name": "@ai-native-solutions/hello-device-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "HTTP proxy for Hello Device — REST endpoints for the ~45-Web-API capability catalogue. Zero framework, Node built-ins only.",
+  "main": "./src/server.js",
+  "bin": {
+    "hello-device-api": "./src/server.js"
+  },
+  "files": ["src/", "README.md", "LICENSE", "Dockerfile", "docker-compose.yml"],
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "keywords": [
+    "hello-device",
+    "web-api",
+    "http",
+    "rest",
+    "capability-detection",
+    "ai-native-solutions"
+  ],
+  "author": "AI-Native Solutions",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sjgant80-hub/hello-device-api.git"
+  },
+  "homepage": "https://sjgant80-hub.github.io/hello-device-api/",
+  "bugs": {
+    "url": "https://github.com/sjgant80-hub/hello-device-api/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
