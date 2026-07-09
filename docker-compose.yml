@@ -1,15 +1,8 @@
 services:
   hello-device-api:
     build: .
-    image: hello-device-api:1.0.0
-    container_name: hello-device-api
     ports:
-      - "8787:8787"
+      - "3000:3000"
     environment:
-      - PORT=8787
+      PORT: "3000"
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8787/health"]
-      interval: 30s
-      timeout: 3s
-      retries: 3
